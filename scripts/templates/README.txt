@@ -1,16 +1,59 @@
-# Project Name
-A brief description of what this project does and who it's for
+# Obglob
+
+[![npm version](https://badge.fury.io/js/@hackylabs%2Fdeep-redact.svg)](https://badge.fury.io/js/@hackylabs%2Fdeep-redact)
+
+Obglob is a library that allows you to extract, remove or modify values from an object using glob patterns to match key
+paths.
+
+Uses safe-flat under the hood to flatten the object/array, while transforming circular references and other support
+values, before globbing over the flattened object/array. Optionally, you can also use the `returnFlattened` option to
+return the flattened result instead of unflattening it.
 
 ## Installation
 
 ```bash
-npm install package-name
+npm install @hackylabs/obglob
 ```
 
 ## Usage
 
-### Benchmark
+```typescript
+// ./src/example.ts
+import {obglob} from '@hackylabs/obglob'; // If you're using CommonJS, import with require('@hackylabs/obglob') instead. Both CommonJS and ESM support named and default imports.
 
-The benchmark is run on a 2021 iMac with an M1 chip with 16GB memory running Sonoma 14.5.
+// Glob over an object
+const obj = {
+  a: {
+    foo: 'bar',
+  },
+  b: {
+    bing: 'bong',
+  },
+}
 
-<--BENCH-->
+const objResults = obglob(obj, { patterns: ['*/foo'] })
+// { a: { foo: 'bar' } }
+
+// Glob over an array
+const arr = [
+  {
+    a: [
+      'foo',
+      'bar',
+    ],
+  },
+  {
+    d: [
+      'bing',
+      'bong',
+    ],
+  },
+]
+
+const arrResults = obglob(arr, { patterns: ['**/a/*'] })
+// [ { a: [ 'foo', 'bar' ] } ]
+```
+
+### Main Options
+
+<--MAIN_OPTIONS-->
