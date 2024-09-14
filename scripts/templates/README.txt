@@ -1,6 +1,7 @@
 # Obglob
 
 [![npm version](https://badge.fury.io/js/@hackylabs%2Fobglob.svg)](https://badge.fury.io/js/@hackylabs%2Fobglob)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hackylabs/obglob/blob/main/LICENSE)
 
 Obglob is a library that allows you to extract, remove or modify values from an object using glob patterns to match key
 paths.
