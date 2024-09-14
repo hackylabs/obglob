@@ -1,7 +1,7 @@
 {
-  "name": "@hackylabs/package-name",
+  "name": "@hackylabs/obglob",
   "version": "1.0.0",
-  "description": "A description of the package",
+  "description": "Glob search an object against patterns.",
   "private": false,
   "license": "MIT",
   "author": "Benjamin Green (https://bengreen.dev)",
@@ -23,8 +23,8 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "build": "npm run lint && npm run test && npm run bench && npm run build:esm && npm run build:cjs && npm run update-readme && npm run update-license",
-    "build:esm": "tsc --project tsconfig.esm.json",
+    "build": "npm run lint && npm run test && npm run build:esm && npm run build:cjs && npm run update-readme && npm run update-license",
+    "build:esm": "tsc --project tsconfig.esm.json && ./scripts/js-to-mjs.sh",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "bench": "npx vitest bench --watch=false",
     "bench:dev": "npx vitest bench",
@@ -34,6 +34,7 @@
     "update-license": "npx ts-node ./scripts/update-license.ts"
   },
   "devDependencies": {
+    "@types/micromatch": "4.0.9",
     "@types/node": "20.14.9",
     "@typescript-eslint/eslint-plugin": "7.14.1",
     "@typescript-eslint/parser": "7.14.1",
@@ -52,9 +53,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hackylabs/package-name"
+    "url": "https://github.com/hackylabs/obglob"
   },
   "bugs": {
-    "url": "https://github.com/hackylabs/package-name/issues"
+    "url": "https://github.com/hackylabs/obglob/issues"
+  },
+  "dependencies": {
+    "micromatch": "4.0.8",
+    "safe-flat": "2.1.0"
   }
 }
