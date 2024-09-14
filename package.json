@@ -1,7 +1,7 @@
 {
   "name": "@hackylabs/obglob",
   "version": "1.0.0",
-  "description": "Glob search an object against patterns.",
+  "description": "Glob search an a nested object/array against patterns. Returns a copy of the original with only the matched properties included or excluded. Optionally modifies the values of the matched properties. Optionally flattens the result.",
   "private": false,
   "license": "MIT",
   "author": "Benjamin Green (https://bengreen.dev)",
@@ -9,7 +9,23 @@
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",
-  "keywords": [],
+  "keywords": [
+    "glob",
+    "object",
+    "array",
+    "search",
+    "extract",
+    "extraction",
+    "object search",
+    "object extraction",
+    "object glob",
+    "object pattern",
+    "array search",
+    "array extraction",
+    "array glob",
+    "array pattern",
+    "glob flatten"
+  ],
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
