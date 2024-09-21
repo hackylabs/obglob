@@ -1,7 +1,7 @@
 {
   "name": "@hackylabs/obglob",
   "version": "1.0.0",
-  "description": "Glob search an a nested object/array against patterns. Returns a copy of the original with only the matched properties included or excluded. Optionally modifies the values of the matched properties. Optionally flattens the result.",
+  "description": "Glob search an a nested object/array against patterns. Returns a copy of the original with only the matched properties/values included or excluded. Optionally modifies the values of the matched properties. Optionally flattens the result.",
   "private": false,
   "license": "MIT",
   "author": "Benjamin Green (https://bengreen.dev)",
