@@ -1,6 +1,8 @@
 export interface ObjectGlobOptions {
     patterns: string[];
     delimiter?: string;
+    globBy?: 'path' | 'value';
+    returnAs?: 'object' | 'paths' | 'values';
     excludeMatched?: boolean;
     includeUnmatched?: boolean;
     returnFlattened?: boolean;

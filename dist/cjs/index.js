@@ -10,7 +10,7 @@ const obglob = (value, options) => {
     if (typeof value !== 'object' || value === null) {
         throw new TypeError('obglob: Value must be an object or array');
     }
-    const { patterns, delimiter = '/', returnFlattened = false, includeUnmatched = false, excludeMatched = false, callback, } = options;
+    const { patterns, delimiter = '/', globBy = 'path', returnAs = 'object', returnFlattened = false, includeUnmatched = false, excludeMatched = false, callback, } = options;
     if (!patterns.length) {
         console.warn('obglob: No patterns provided, returning original value');
         return value;
@@ -20,19 +20,27 @@ const obglob = (value, options) => {
         return {};
     }
     const flattened = (0, safe_flat_1.flatten)(value, delimiter);
-    const keys = Object.keys(flattened);
-    const matchedKeys = (0, micromatch_1.default)(keys, patterns);
+    const subjects = globBy === 'path'
+        ? Object.keys(flattened)
+        : Object.values(flattened).map(String);
+    const matched = (0, micromatch_1.default)(subjects, patterns);
     const matches = Object.fromEntries(Object.entries(flattened)
         .map(([key, val]) => {
-        if (excludeMatched && matchedKeys.includes(key))
+        const subject = globBy === 'path' ? key : String(val);
+        if (excludeMatched && matched.includes(subject))
             return [];
-        if (!matchedKeys.includes(key))
+        if (!matched.includes(subject))
             return includeUnmatched ? [key, val] : [];
         return [key, callback ? callback(val) : val];
     })
         .filter(([, val]) => val !== undefined));
-    if (returnFlattened)
+    if (returnFlattened || returnAs !== 'object') {
+        if (returnAs === 'values')
+            return Object.values(matches);
+        if (returnAs === 'paths')
+            return Object.keys(matches);
         return matches;
+    }
     return Array.isArray(value)
         ? Object.values((0, safe_flat_1.unflatten)(matches, delimiter))
         : (0, safe_flat_1.unflatten)(matches, delimiter);
