@@ -5,6 +5,7 @@ export interface ObjectGlobOptions {
   patterns: string[]
   delimiter?: string
   globBy?: 'path' | 'value'
+  returnAs?: 'object' | 'paths' | 'values'
   excludeMatched?: boolean
   includeUnmatched?: boolean
   returnFlattened?: boolean
@@ -20,6 +21,7 @@ const obglob = (value: object, options: ObjectGlobOptions): object => {
     patterns,
     delimiter = '/',
     globBy = 'path',
+    returnAs = 'object',
     returnFlattened = false,
     includeUnmatched = false,
     excludeMatched = false,
@@ -53,7 +55,12 @@ const obglob = (value: object, options: ObjectGlobOptions): object => {
       .filter(([, val]) => val !== undefined),
   )
 
-  if (returnFlattened) return matches
+  if (returnFlattened || returnAs !== 'object') {
+    if (returnAs === 'values') return Object.values(matches)
+    if (returnAs === 'paths') return Object.keys(matches)
+    return matches
+  }
+
   return Array.isArray(value)
     ? Object.values(unflatten(matches, delimiter))
     : unflatten(matches, delimiter)

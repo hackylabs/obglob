@@ -106,6 +106,29 @@ describe('Obglob', () => {
         })
       })
 
+      describe('when returnAs is set...', () => {
+        describe('to values', () => {
+          it('should return the matched values', () => {
+            const result = obglob(value, { patterns: ['a/b'], returnAs: 'values' })
+            expect(result).toEqual([1])
+          })
+        })
+
+        describe('to paths', () => {
+          it('should return the matched paths', () => {
+            const result = obglob(value, { patterns: ['a/b'], returnAs: 'paths' })
+            expect(result).toEqual(['a/b'])
+          })
+        })
+
+        describe('to object', () => {
+          it('should return the matches as an object', () => {
+            const result = obglob(value, { patterns: ['a/b'], returnAs: 'object' })
+            expect(result).toEqual({ a: { b: 1 } })
+          })
+        })
+      })
+
       describe('when the value is an array', () => {
         it('should return the matched keys as an array', () => {
           const result = obglob([value, { d: 3 }], { patterns: ['*/a/b'] })
