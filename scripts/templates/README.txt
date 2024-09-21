@@ -35,24 +35,21 @@ const obj = {
 const objResults = obglob(obj, { patterns: ['*/foo'] })
 // { a: { foo: 'bar' } }
 
-// Glob over an array
-const arr = [
-  {
-    a: [
-      'foo',
-      'bar',
-    ],
-  },
-  {
-    d: [
-      'bing',
-      'bong',
-    ],
-  },
-]
+// Glob by value
+const valueResults = obglob(obj, { patterns: ['ba*'], globBy: 'value' })
+// { a: { foo: 'bar' } }
 
-const arrResults = obglob(arr, { patterns: ['**/a/*'] })
-// [ { a: [ 'foo', 'bar' ] } ]
+// Return as paths
+const paths = obglob(obj, { patterns: ['*/foo'], returnAs: 'paths' })
+// [ 'a/foo' ]
+
+// Return as values
+const values = obglob(obj, { patterns: ['*/foo'], returnAs: 'values' })
+// [ 'bar' ]
+
+// Exclude matches and return the rest
+const unmatched = obglob(obj, { patterns: ['*/foo'], excludeMatched: true, includeUnmatched: true })
+// { b: { bing: 'bong' } }
 ```
 
 ### Main Options
