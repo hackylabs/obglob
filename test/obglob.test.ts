@@ -99,6 +99,13 @@ describe('Obglob', () => {
         })
       })
 
+      describe('when globBy is set to value', () => {
+        it('should return the matches by matching values', () => {
+          const result = obglob(value, { patterns: ['1'], globBy: 'value' })
+          expect(result).toEqual({ a: { b: 1 } })
+        })
+      })
+
       describe('when the value is an array', () => {
         it('should return the matched keys as an array', () => {
           const result = obglob([value, { d: 3 }], { patterns: ['*/a/b'] })

@@ -4,6 +4,7 @@ import micromatch from 'micromatch'
 export interface ObjectGlobOptions {
   patterns: string[]
   delimiter?: string
+  globBy?: 'path' | 'value'
   excludeMatched?: boolean
   includeUnmatched?: boolean
   returnFlattened?: boolean
@@ -18,6 +19,7 @@ const obglob = (value: object, options: ObjectGlobOptions): object => {
   const {
     patterns,
     delimiter = '/',
+    globBy = 'path',
     returnFlattened = false,
     includeUnmatched = false,
     excludeMatched = false,
@@ -35,13 +37,17 @@ const obglob = (value: object, options: ObjectGlobOptions): object => {
   }
 
   const flattened = flatten(value, delimiter)
-  const keys = Object.keys(flattened)
-  const matchedKeys = micromatch(keys, patterns)
+  const subjects = globBy === 'path'
+    ? Object.keys(flattened)
+    : Object.values(flattened).map(String)
+
+  const matched = micromatch(subjects, patterns)
   const matches = Object.fromEntries(
     Object.entries(flattened)
       .map(([key, val]) => {
-        if (excludeMatched && matchedKeys.includes(key)) return []
-        if (!matchedKeys.includes(key)) return includeUnmatched ? [key, val] : []
+        const subject = globBy === 'path' ? key : String(val)
+        if (excludeMatched && matched.includes(subject)) return []
+        if (!matched.includes(subject)) return includeUnmatched ? [key, val] : []
         return [key, callback ? callback(val) : val]
       })
       .filter(([, val]) => val !== undefined),
