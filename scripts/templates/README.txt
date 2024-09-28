@@ -4,11 +4,13 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hackylabs/obglob/blob/main/LICENSE)
 
 Obglob is a library that allows you to extract, remove or modify values from an object using glob patterns to match key
-paths.
+paths or values.
 
 Uses safe-flat under the hood to flatten the object/array, while transforming circular references and other support
-values, before globbing over the flattened object/array. Optionally, you can also use the `returnFlattened` option to
-return the flattened result instead of unflattening it.
+values, before globbing over the flattened object/array using micromatch. Optionally, you can also use the
+`returnFlattened` option to return the flattened result instead of unflattening it.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/hackylabs)
 
 ## Installation
 
