@@ -1,6 +1,6 @@
 {
   "name": "@hackylabs/obglob",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Glob search an a nested object/array against patterns. Returns a copy of the original with only the matched properties/values included or excluded. Optionally modifies the values of the matched properties. Optionally flattens the result.",
   "private": false,
   "license": "MIT",
@@ -9,6 +9,16 @@
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "glob",
     "object",
@@ -25,16 +35,6 @@
     "array glob",
     "array pattern",
     "glob flatten"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
-    }
-  },
-  "files": [
-    "dist"
   ],
   "scripts": {
     "lint": "eslint",
