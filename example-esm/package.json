@@ -1,0 +1,23 @@
+{
+  "name": "example-esm",
+  "version": "1.0.0",
+  "description": "",
+  "types": "./dist/types/index.d.ts",
+  "module": "./dist/esm/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test:dev": "npx vitest",
+    "test": "npx vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hackylabs/globob.git"
+  },
+  "private": true,
+  "dependencies": {
+    "@hackylabs/obglob": "github:hackylabs/obglob#ci"
+  }
+}
